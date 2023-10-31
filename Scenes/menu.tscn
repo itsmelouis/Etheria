@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhiv8q0a2vrdc"]
+
+[ext_resource type="Script" path="res://Scripts/menu.cs" id="1_8ort5"]
+[ext_resource type="Texture2D" uid="uid://bn8a0v30tmj1d" path="res://Sprites/Buttons/tile_0447.png" id="1_ya8x3"]
+[ext_resource type="Texture2D" uid="uid://cvo3pqd1sdbdo" path="res://Sprites/Buttons/tile_0448.png" id="2_jclp2"]
+[ext_resource type="Texture2D" uid="uid://dako73mq4k18t" path="res://Sprites/menu_background.png" id="2_u6kcc"]
+[ext_resource type="FontFile" uid="uid://bfd64q8d4gax5" path="res://fonts/PressStart2P.ttf" id="5_ver2s"]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_8ort5")
+
+[node name="bg" type="Sprite2D" parent="."]
+position = Vector2(-69.3334, -48)
+scale = Vector2(1.36667, 1.36667)
+texture = ExtResource("2_u6kcc")
+centered = false
+
+[node name="StartButton" type="TextureButton" parent="."]
+offset_left = 560.0
+offset_top = 280.0
+offset_right = 576.0
+offset_bottom = 296.0
+scale = Vector2(6.92359, 6.92359)
+texture_normal = ExtResource("1_ya8x3")
+texture_pressed = ExtResource("2_jclp2")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 456.0
+offset_top = 152.0
+offset_right = 536.0
+offset_bottom = 178.0
+scale = Vector2(4.05199, 4.05199)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_ver2s")
+text = "Start"
+
+[node name="LeaveButton" type="Button" parent="."]
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 568.0
+offset_bottom = 487.0
+scale = Vector2(3.26944, 3.26944)
+text = "Quitter"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]
