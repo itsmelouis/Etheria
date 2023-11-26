@@ -34,6 +34,17 @@ public partial class Player : CharacterBody2D
         _progressBar.Value = Hp;
     }
 
+    private void ExecuteBattle()
+    {
+        for (int i = 0; i < GetSlideCollisionCount(); i++)
+        {
+            KinematicCollision2D collision = GetSlideCollision(i);
+            var collisionToNode = collision.GetCollider() as Node;
+            var collisionToString = collisionToNode.Name;
+            if (collisionToString == "Enemy") GetTree().ChangeSceneToFile("res://Scenes/battle.tscn");
+        }
+    }
+
     private Color UpdateColorHealthBar()
     {
         if (Hp >= 50) return new Color(94, 209, 58, 255);
@@ -42,23 +53,19 @@ public partial class Player : CharacterBody2D
     }
     public override void _PhysicsProcess(double delta)
     {
-        Print(_progressBar.Modulate);
+        ExecuteBattle();
         Vector2 velocity = Velocity;
-        // Get the input direction and handle the movement/deceleration.
-        // As good practice, you should replace UI actions with custom gameplay actions.
         Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
         if (direction != Vector2.Zero)
         {
             if (direction.Y < 0)
             {
                 _anim.Play("walkUp");
-                Damage(2);
             }
 
             if (direction.Y > 0)
             {
                 _anim.Play("walkDown");
-                Regen(2);
             }
 
             if (direction.X > 0)

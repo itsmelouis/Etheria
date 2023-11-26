@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4b0mqvkobm7b"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.cs" id="1_e0ne7"]
+[ext_resource type="Texture2D" uid="uid://dwgcqv8wk8rpq" path="res://Sprites/Player/player_tilesheet.png" id="1_rf423"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_egi4p"]
+size = Vector2(61, 86)
+
+[sub_resource type="Animation" id="Animation_mbd8b"]
+resource_name = "idleEnemy"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_lf4sy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r4c6d"]
+_data = {
+"RESET": SubResource("Animation_lf4sy"),
+"idleEnemy": SubResource("Animation_mbd8b")
+}
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_e0ne7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 3)
+shape = SubResource("RectangleShape2D_egi4p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+texture = ExtResource("1_rf423")
+hframes = 9
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r4c6d")
+}
